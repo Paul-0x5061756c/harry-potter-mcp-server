@@ -61,10 +61,16 @@ public static class HPTools
   [McpServerTool, Description("Get a list of Harry Potter characters")]
   public static async Task<string> GetCharacters(
       HttpClient client,
+      [Description("Language of the characters. Default is English (en).")] Language language = Language.en,
       [Description("Searches all items and returns the best matches")] String? search = null
       )
   {
-    var url = string.IsNullOrEmpty(search) ? "/characters" : $"/characters?search={Uri.EscapeDataString(search)}";
+    var url = string.Format("/{0}/characters", language.ToString());
+
+    if(!string.IsNullOrEmpty(search))
+    {
+      url += $"?search={Uri.EscapeDataString(search)}";
+    }
 
     using var jsonDocument = await client.ReadJsonDocumentAsync(url);
     var characters = jsonDocument.RootElement.EnumerateArray();
@@ -90,10 +96,11 @@ public static class HPTools
 
   [McpServerTool, Description("Get a random Harry Potter character")]
   public static async Task<string> GetRandomCharacter(
-      HttpClient client
+      HttpClient client,
+      [Description("Language of the character. Default is English (en).")] Language language = Language.en
       )
   {
-    var url = "/characters/random";
+    var url = string.Format("/{0}/characters/random", language.ToString());
 
     using var jsonDocument = await client.ReadJsonDocumentAsync(url);
     var character = jsonDocument.RootElement;
