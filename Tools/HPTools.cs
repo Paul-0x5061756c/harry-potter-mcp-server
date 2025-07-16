@@ -84,7 +84,7 @@ public static class HPTools
           {
           return $"""
           FullName: {character.GetProperty("fullName").GetString()}
-          NickName: {character.GetProperty("nickName").GetString()}
+          NickName: {character.GetProperty("nickname").GetString()}
           HogwartsHouse: {character.GetProperty("hogwartsHouse").GetString()}
           InterpretedBy: {character.GetProperty("interpretedBy").GetString()}
           Children: {string.Join(", ", character.GetProperty("children").EnumerateArray().Select(c => c.GetString()))}
@@ -107,7 +107,7 @@ public static class HPTools
 
     return $"""
     FullName: {character.GetProperty("fullName").GetString()}
-    NickName: {character.GetProperty("nickName").GetString()}
+    NickName: {character.GetProperty("nickname").GetString()}
     HogwartsHouse: {character.GetProperty("hogwartsHouse").GetString()}
     InterpretedBy: {character.GetProperty("interpretedBy").GetString()}
     Children: {string.Join(", ", character.GetProperty("children").EnumerateArray().Select(c => c.GetString()))}
